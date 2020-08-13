@@ -33,7 +33,8 @@ class category(models.Model):
 
 class task_pool(models.Model):
 	category = models.ForeignKey(category, on_delete=models.CASCADE)
-	message_attachment_id = models.IntegerField(default=0)
+	# message_attachment_id = models.IntegerField(default=0, null = True)
+	msg_attch_id = models.IntegerField(default=0, null = True)
 	# mail_box = models.ForeignKey(User, on_delete=models.CASCADE)
 	mailbox_id = models.IntegerField(default = 0)
 	subject = models.CharField(max_length=500)

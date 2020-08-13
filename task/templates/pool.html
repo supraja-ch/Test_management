@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <form action='{%url "category_get"%}'  autocomplete="off">
+        <p>
+        <select id="category_id" name="category_id" class="form-control" >
+            <option value="%">select</option>
+                {% for data in category_list %}
+                    <option value="{{data.category_id}}">{{ data.category_name }}</option>
+                {% endfor %}<br>
+                
+        </select>
+        </p>
+       <p>
+        <select id="id" name="subject" class="form-control" >
+            <option value="%">select</option>
+                {% for data in message_list %}
+                    <option value="{{ data.id }}">{{ data.subject }}</option>
+                {% endfor %}<br>
+                
+        </select>
+        </p>
+        <p>
+        <!-- <button >SUBMIT</button> -->
+        {% csrf_token %}
+        <input onclick="setGetParameter()" type="button" class="btn btn-primary" value = "SUBMIT"/>  
+        </p>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+        <script>
+        function setGetParameter(){
+            selectElement =  document.querySelector('#category_id'); 
+            cat_id = selectElement.value;
+            selectElement =  document.querySelector('#id'); 
+            msg_id = selectElement.value;
+
+            console.log(category_id)
+            
+            fetch("http://127.0.0.1:8000/api/getails_category",{
+                method:'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:JSON.stringify({"category_id" :cat_id, "id": msg_id})
+
+            }).then(res=>{
+                if (res.status === 200) {
+                
+                    alert("success")}
+                if (res.status === 400) {
+                
+                    alert("Not success")}
+            });
+        }
+        
+         </script>
+    </form>
+</body>
+</html>

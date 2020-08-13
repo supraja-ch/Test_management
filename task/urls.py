@@ -6,6 +6,8 @@ urlpatterns= [
     path('get_task', get_task_details.as_view(),name='taskdetails'),
     path('mail_task_details', mail_task_details.as_view(),name='mail_task_details'),
     path('getails_category', getails_category.as_view(),name='getails_category'),
+    path('category_get/', category_get.as_view(),name='category_get'),
+
 
 
 
